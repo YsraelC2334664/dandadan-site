@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dandadan Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bevan&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: url("images/bg-dandadan.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Bevan', serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .custom-card {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 100%;
+      margin: 20px;
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.7);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      text-shadow: 0 0 15px magenta, 0 0 25px cyan;
+      font-weight: bold;
+    }
+
+    .btn-custom {
+      background: linear-gradient(90deg, magenta, cyan);
+      border: none;
+      font-weight: bold;
+      color: black;
+      transition: 0.3s;
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(90deg, cyan, magenta);
+      transform: scale(1.07);
+      box-shadow: 0 0 20px magenta;
+    }
+
+    label.error {
+      color: #ff6666;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container vh-100 d-flex align-items-center justify-content-center">
+    <div class="custom-card text-center">
+      <h2 class="mb-4">Dandadan Wiki Login</h2>
+      <form id="loginForm">
+        <div class="mb-3 text-start">
+          <label class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" placeholder="Enter username">
+        </div>
+        <div class="mb-3 text-start">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn btn-custom w-100">Login</button>
+        <p class="mt-3">
+          Don’t have an account?
+          <a href="register.html" style="color:magenta; text-decoration:none;">Register</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#loginForm").validate({
+        rules: {
+          username: "required",
+          password: "required"
+        },
+        messages: {
+          username: "Enter your username",
+          password: "Enter your password"
+        },
+        submitHandler: function () {
+          let username = $("[name='username']").val();
+          let password = $("[name='password']").val();
+
+          if (username === "admin" && password === "12345") {
+            localStorage.setItem("username", username);
+            window.location.href = "landing.html";
+          } else {
+            alert("Invalid credentials! Use admin / 12345");
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
